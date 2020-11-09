@@ -29,15 +29,15 @@ def SupprimerFichier(path):
 		
 window = Tk()
 window.title("SCREENEY")
-window.geometry('300x150')
+window.geometry('290x180')
 
  #lbl = Label(window, text="Hello")
 #lbl.grid(column=0, row=0)
-labelChoix = Label(window, text = "Matières")
+labelChoix = Label(window, text = "Matières :")
 labelChoix.pack()
-listeMatieres=["AlgoProc", "Proba","MesureIntegration","Optimisation"]
+listeMatieres=["0","AlgoProc", "Proba","MesureIntegration","Optimisation","EOE", "PPP","Compta", ]
 listeMatieres.sort()
-listeCombo = ttk.Combobox(window,values=listeMatieres,state="readonly")
+listeCombo = ttk.Combobox(window,values=listeMatieres,state="readonly",justify='center',width=15)
 listeCombo.current(0)
 listeCombo.pack()
 
@@ -71,25 +71,29 @@ def clicked():
 		semblable = SemblableFichier(photo,ancienphoto)
 		if semblable[0]:
 			print(">>> PAREIL! "+str(semblable[1]) + " # " +photo+" VS "+ancienphoto)
-			label.config(text="Image similaire ! Je cala pas")
+			label.config(text="Image similaire ! Je cala pas",fg='red')
 			SupprimerFichier(photo)
 		#sinon, si nouvelle photo
 		else:
-			label.config(text=photo.split('/')[-1])
+			label.config(text=photo.split('/')[-1],fg='green')
 			ancienphoto = photo
 			c+= 1
 	else:
-		label.config(text=photo.split('/')[-1])
+		label.config(text=photo.split('/')[-1],fg='green')
 		ancienphoto = photo
 		c+=1
 	
 	
 	time.sleep(1)
 
-btn = Button(window, text="Screen", command=clicked)
-btn.pack()
+btn = Button(window, text="Screen 📸", command=clicked,width=17,
+                           height=2)
+btn.pack(padx=5, pady=10)
+
 label = Label(window, text = "")
 label.pack()
 
+cred = Label(window, text = "Code by Mlamali Said Salimo.",font=("inherit", 8))
+cred.pack(side='bottom')
 window.mainloop()
 
