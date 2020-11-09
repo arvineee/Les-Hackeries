@@ -1,4 +1,10 @@
-# One-Screen-
+# Logiciel "Screeney One Click"
+
+Installations prérequis:
+• pyautogui
+• filecmp
+• tkinter (si pas déjà installé)
+
 Sélectionner la matière puis screener votre écran en un clique. La photo sera rangée dans un dossier où les images sont classées par jour.
 Si vous prenez 2 photos de suite trop semblable alors la photo est supprimée... évitons les doublons :)
 
