@@ -37,7 +37,7 @@ labelChoix = Label(window, text = "Matières")
 labelChoix.pack()
 listeMatieres=["AlgoProc", "Proba","MesureIntegration","Optimisation"]
 listeMatieres.sort()
-listeCombo = ttk.Combobox(window,values=listeMatieres)
+listeCombo = ttk.Combobox(window,values=listeMatieres,state="readonly")
 listeCombo.current(0)
 listeCombo.pack()
 
@@ -46,7 +46,7 @@ ancienphoto = ""
 def clicked():
 	global c,ancienphoto
 	nomMatiere = listeCombo.get()
-	nomEmplacementSauvegarde = "Screen Automatique - " + nomMatiere
+	nomEmplacementSauvegarde = "SCREENEY - " + nomMatiere
 	if not os.path.exists(nomEmplacementSauvegarde):
 		os.makedirs(nomEmplacementSauvegarde)
 
