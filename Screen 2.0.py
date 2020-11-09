@@ -29,7 +29,7 @@ def SupprimerFichier(path):
 		
 window = Tk()
 window.title("SCREENEY")
-window.geometry('290x180')
+window.geometry('320x210')
 
  #lbl = Label(window, text="Hello")
 #lbl.grid(column=0, row=0)
@@ -43,7 +43,8 @@ listeCombo.pack()
 
 c = 0
 ancienphoto = ""
-def clicked():
+
+def capturer():
 	global c,ancienphoto
 	nomMatiere = listeCombo.get()
 	nomEmplacementSauvegarde = "SCREENEY - " + nomMatiere
@@ -55,10 +56,13 @@ def clicked():
 		os.makedirs(nomEmplacementSauvegarde)
 	
 	semblable = False
-	
+	comm = Comment.get()
+	comm = comm.strip()
+	if len(comm) > 0:
+		comm = ' ' + comm
 	
 	myDatetime = datetime.datetime.now()
-	nomFichier= myDatetime.strftime('%Y-%m-%d-' + nomMatiere + '-%H%M%S')
+	nomFichier= myDatetime.strftime('%Y-%m-%d-%H%M%S'+ comm )
 	photo = nomEmplacementSauvegarde + "/" + nomFichier + ".png"
 	
 	# prendre photo	
@@ -75,23 +79,36 @@ def clicked():
 			SupprimerFichier(photo)
 		#sinon, si nouvelle photo
 		else:
-			label.config(text=photo.split('/')[-1],fg='green')
-			ancienphoto = photo
 			c+= 1
+			label.config(text="#"+str(c) + " ▪ "+ photo.split('/')[-1],fg='green')
+			ancienphoto = photo
+			
 	else:
-		label.config(text=photo.split('/')[-1],fg='green')
-		ancienphoto = photo
 		c+=1
-	
+		label.config(text="#"+str(c) + " ▪ "+ photo.split('/')[-1],fg='green')
+		ancienphoto = photo
+		
 	
 	time.sleep(1)
+	
+
+def clicked():
+	global value;
+	capturer()
+	
 
 btn = Button(window, text="Screen 📸", command=clicked,width=17,
                            height=2)
 btn.pack(padx=5, pady=10)
 
+Comment = Entry(window, bd =3)
+Comment.pack()
+
+
 label = Label(window, text = "")
 label.pack()
+
+
 
 cred = Label(window, text = "Code by Mlamali Said Salimo.",font=("inherit", 8))
 cred.pack(side='bottom')
