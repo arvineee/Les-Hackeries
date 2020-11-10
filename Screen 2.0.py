@@ -29,16 +29,19 @@ def SupprimerFichier(path):
 		
 window = Tk()
 window.title("SCREENEY")
+window['bg'] = '#49A'
+window.iconphoto(False, PhotoImage(file='ico/icon.png'))
+window.attributes('-topmost', 1)
 window.geometry('320x210')
 
  #lbl = Label(window, text="Hello")
 #lbl.grid(column=0, row=0)
 labelChoix = Label(window, text = "Matières :")
 labelChoix.pack()
-listeMatieres=["0","AlgoProc", "Proba","MesureIntegration","Optimisation","EOE", "PPP","Compta", ]
+listeMatieres=["Selectionner","AlgoProc", "Proba","TheoGraphes","MesureIntegration","Optimisation","BDD","EOE", "PPP","Compta" ]
 listeMatieres.sort()
 listeCombo = ttk.Combobox(window,values=listeMatieres,state="readonly",justify='center',width=15)
-listeCombo.current(0)
+listeCombo.current(8)
 listeCombo.pack()
 
 c = 0
