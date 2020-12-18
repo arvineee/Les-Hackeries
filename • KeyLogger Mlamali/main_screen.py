@@ -7,7 +7,7 @@ from shutil import copyfile
 username = os.getlogin()
 nomFichierActuelle = os.path.basename(__file__)
 
-# **** AU DEMARRAGE
+# **** AU DEMARRAGE t
 #copyfile(nomFichierActuelle,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{nomFichierActuelle}")
 
 # **** EMPLACEMENT SAUVEGARDE
