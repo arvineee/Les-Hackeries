@@ -29,7 +29,6 @@ def SupprimerFichier(path):
 		
 window = Tk()
 window.title("SCREENEY")
-window['bg'] = '#49A'
 window.iconphoto(False, PhotoImage(file='ico/icon.png'))
 window.attributes('-topmost', 1)
 window.geometry('320x210')
