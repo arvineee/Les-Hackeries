@@ -12,5 +12,3 @@ for ficpy in listesFichiersPy:
 	destination = nomEmplacementSauvegarde + "/" + namee + ".pyw"
 	print(destination)
 	copyfile(ficpy,destination)
-
-## commande pour envoyer le bail dans demmarrage
