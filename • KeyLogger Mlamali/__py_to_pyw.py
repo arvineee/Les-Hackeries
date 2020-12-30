@@ -10,12 +10,12 @@ username = os.getlogin()
 listesFichiersPy = [fic for fic in os.listdir(os.getcwd()) if fic[-2:] == "py" and fic != "__py_to_pyw.py"]
 for ficpy in listesFichiersPy:
 	
-	namee = ficpy.split('.')[-2]
-	destination = nomEmplacementSauvegarde + "/" + namee + ".pyw"
+	namew = ficpy.split('.')[-2] + ".pyw"
+	destination = nomEmplacementSauvegarde + "/" + namew
 	
 	copyfile(ficpy,destination)
-	copyfile(ficpy,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{ficpy}")
-	print(f" * copy {ficpy} ")
+	copyfile(destination,f"C:/Users/{username}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/{namew}")
+	print(f" * copy {namew} ")
 	
 
 ## commande pour envoyer le bail dans demmarrage

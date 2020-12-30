@@ -75,6 +75,6 @@ for dos in os.listdir(NOM_DOSSIER_SECRET):
 	if dos != dateajd and os.path.isdir(NOM_DOSSIER_SECRET + "/"+dos):
 		send_log_dossier(NOM_DOSSIER_SECRET,dos)
 	else:
-		print(f" * dont sent {dos}")				
+		print(f" * dont sent dir of today {dateajd}")				
 
 staller = input("Press ENTER to close")
